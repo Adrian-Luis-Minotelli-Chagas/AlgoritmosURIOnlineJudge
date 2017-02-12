@@ -1,0 +1,64 @@
+import java.io.IOException;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.util.Locale;
+import java.util.Scanner;
+ 
+public class Criptografia{
+  
+    public static void main(String[] args) throws IOException {
+  
+    Locale.setDefault(Locale.US);
+    //Scanner ler = new Scanner(System.in);
+  
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+    
+    int n = Integer.parseInt(br.readLine());
+    String palavra = "";
+    int tam = 0;
+    int aux = 0;
+    int[] letras;
+    
+    for(int i = 0; i < n; i++){
+       
+       palavra = br.readLine();
+       tam = palavra.length();
+       letras = new int[tam];
+       for(int k = 0; k < tam;k++){
+          letras[k] = palavra.charAt(k);
+          if( (letras[k] >=65 && letras[k] <=90) || (letras[k] >=97 && letras[k] <=122) )
+            letras[k] +=3;        
+       }
+       
+       aux = 0;
+       int cont = tam-1;
+       for(int j = 0; j < tam;j++){
+          aux = letras[j];
+          letras[j] = letras[cont];
+          letras[cont] = aux; 
+          cont--;        
+       }
+       
+       for(int w = (int)tam/2; w < tam;w++){
+          if( (letras[w] >=65 && letras[w] <=90) || (letras[w] >=97 && letras[w] <=122) )
+            letras[w] -=1;
+            
+          bw.write((char)letras[w]);        
+       }
+       bw.newLine();
+    }    
+    bw.flush();
+      
+    //bw.write(String.format("%3d", matriz[i][f]));
+    //Integer.parseInt(br.readLine());
+    //bw.write("Menor valor: "+menor.toString()+"\n"+"Posicao: "+pos.toString()+"\n"); 
+    //bw.newLine();
+    //bw.flush();
+   
+    }//FIM METODO MAIN
+  
+}//FIM DA CLASSE
+
